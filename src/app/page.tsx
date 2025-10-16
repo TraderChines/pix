@@ -11,9 +11,9 @@ import { SidebarProvider, Sidebar, SidebarInset, SidebarTrigger, SidebarHeader, 
 export default function Home() {
   const [receiptData, setReceiptData] = useState<PixReceiptData>({
     amount: 10000,
-    timestamp: new Date('2023-08-12T08:06:34'),
+    timestamp: new Date(),
     recipientName: 'Localpay do Brasil Serviços de Pagamentos Ltda',
-    payerName: 'Nome do Cliente',
+    payerName: 'Localpay do Brasil Serviços de Pagamentos Ltda',
   });
   const receiptRef = useRef<HTMLDivElement>(null);
 
