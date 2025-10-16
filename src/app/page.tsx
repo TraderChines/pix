@@ -21,6 +21,13 @@ export default function Home() {
     const element = receiptRef.current;
     if (!element) return;
 
+    // Temporarily switch to dark theme for capture if current theme is light
+    const isLightTheme = document.documentElement.classList.contains('light');
+    if (isLightTheme) {
+      document.documentElement.classList.remove('light');
+      document.documentElement.classList.add('dark');
+    }
+
     try {
       const canvas = await html2canvas(element, {
         backgroundColor: '#000000',
@@ -35,6 +42,12 @@ export default function Home() {
       document.body.removeChild(link);
     } catch (error) {
       console.error('Error generating image:', error);
+    } finally {
+        // Switch back to light theme if it was the original theme
+        if (isLightTheme) {
+            document.documentElement.classList.remove('dark');
+            document.documentElement.classList.add('light');
+        }
     }
   };
 
@@ -49,7 +62,7 @@ export default function Home() {
         </SidebarContent>
       </Sidebar>
       <SidebarInset>
-        <main className="relative bg-black text-white min-h-screen flex flex-col items-center justify-center p-4">
+        <main className="relative bg-background text-foreground min-h-screen flex flex-col items-center justify-center p-4">
           <div className="absolute top-4 left-4">
             <SidebarTrigger />
           </div>

@@ -13,6 +13,7 @@ import { format } from 'date-fns';
 import { pt } from 'date-fns/locale';
 import { saveReceipt } from '@/app/actions';
 import { useToast } from "@/hooks/use-toast";
+import { ThemeToggle } from './theme-toggle';
 
 interface EditPanelProps {
     receiptData: PixReceiptData;
@@ -133,9 +134,12 @@ export function EditPanel({ receiptData, setReceiptData }: EditPanelProps) {
                     />
                 </div>
             </div>
-            <Button type="submit" disabled={isPending} className="w-full bg-accent text-accent-foreground hover:bg-accent/90">
-                {isPending ? 'Salvando...' : <> <Save className="mr-2 h-4 w-4" /> Salvar Alterações </>}
-            </Button>
+            <div className="space-y-2">
+                <ThemeToggle />
+                <Button type="submit" disabled={isPending} className="w-full bg-accent text-accent-foreground hover:bg-accent/90">
+                    {isPending ? 'Salvando...' : <> <Save className="mr-2 h-4 w-4" /> Salvar Alterações </>}
+                </Button>
+            </div>
         </form>
     );
 }
