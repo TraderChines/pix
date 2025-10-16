@@ -7,11 +7,10 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Button } from '@/components/ui/button';
-import { Calendar as CalendarIcon, Save, Clock, Download } from 'lucide-react';
+import { Calendar as CalendarIcon, Clock, Download } from 'lucide-react';
 import { Calendar } from '@/components/ui/calendar';
 import { format } from 'date-fns';
 import { pt } from 'date-fns/locale';
-import { saveReceipt } from '@/app/actions';
 import { useToast } from "@/hooks/use-toast";
 import { ThemeToggle } from './theme-toggle';
 
@@ -22,7 +21,6 @@ interface EditPanelProps {
 }
 
 export function EditPanel({ receiptData, setReceiptData, onDownloadImage }: EditPanelProps) {
-    const [isPending, startTransition] = useTransition();
     const { toast } = useToast();
 
     const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -56,31 +54,12 @@ export function EditPanel({ receiptData, setReceiptData, onDownloadImage }: Edit
         setReceiptData(prev => ({ ...prev, payerName: e.target.value }));
     };
     
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        startTransition(async () => {
-            const result = await saveReceipt(receiptData);
-            if(result.success) {
-                toast({
-                    title: "Sucesso!",
-                    description: `Comprovante salvo com ID: ${result.id}`,
-                });
-            } else {
-                toast({
-                    variant: "destructive",
-                    title: "Erro ao Salvar",
-                    description: result.error,
-                });
-            }
-        });
-    }
-
     const handleSyncDateTime = () => {
         setReceiptData(prev => ({ ...prev, timestamp: new Date() }));
     };
 
     return (
-        <form onSubmit={handleSubmit} className="p-4 space-y-6 h-full flex flex-col">
+        <div className="p-4 space-y-6 h-full flex flex-col">
             <div className="flex-grow space-y-6">
                 <div className="space-y-2">
                     <Label htmlFor="amount">Valor (R$)</Label>
@@ -150,10 +129,7 @@ export function EditPanel({ receiptData, setReceiptData, onDownloadImage }: Edit
                     Baixar comprovante (PNG)
                 </Button>
                 <ThemeToggle />
-                <Button type="submit" disabled={isPending} className="w-full bg-accent text-accent-foreground hover:bg-accent/90">
-                    {isPending ? 'Salvando...' : <> <Save className="mr-2 h-4 w-4" /> Salvar Alterações </>}
-                </Button>
             </div>
-        </form>
+        </div>
     );
 }
