@@ -23,42 +23,16 @@ const ReceiptIcon = (props: React.SVGProps<SVGSVGElement>) => (
       xmlns="http://www.w3.org/2000/svg"
       width="64"
       height="64"
-      viewBox="0 0 64 64"
+      viewBox="0 0 24 24"
       fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
       {...props}
     >
-      <g clipPath="url(#clip0_2_63)">
-        <path
-          d="M18.6667 5.33331H45.3333C51.2217 5.33331 56 10.1116 56 16V48C56 53.8884 51.2217 58.6666 45.3333 58.6666H18.6667C12.7783 58.6666 8 53.8884 8 48V16C8 10.1116 12.7783 5.33331 18.6667 5.33331Z"
-          fill="currentColor"
-        />
-        <path
-          d="M42.6667 21.3333H21.3333C20.597 21.3333 20 21.9303 20 22.6666V41.3333C20 42.0696 20.597 42.6666 21.3333 42.6666H42.6667C43.403 42.6666 44 42.0696 44 41.3333V22.6666C44 21.9303 43.403 21.3333 42.6667 21.3333Z"
-          stroke="black"
-          strokeWidth="2.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M28 34.6666L32 38.6666L36 34.6666"
-          stroke="black"
-          strokeWidth="2.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M32 26.6666V38.6666"
-          stroke="black"
-          strokeWidth="2.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </g>
-      <defs>
-        <clipPath id="clip0_2_63">
-          <rect width="64" height="64" fill="white" />
-        </clipPath>
-      </defs>
+      <circle cx="12" cy="12" r="10" fill="currentColor" stroke="none" />
+      <path d="m9 12 2 2 4-4" stroke="black" />
     </svg>
   );
 
@@ -75,7 +49,7 @@ export const PixReceipt = forwardRef<HTMLDivElement, PixReceiptProps>(({ data },
   return (
     <div ref={ref} className="bg-black text-white w-full max-w-md mx-auto p-8 font-body">
       <div className="flex flex-col items-center text-center">
-        <ReceiptIcon className="text-accent mb-6" />
+        <ReceiptIcon className="text-accent mb-6 h-16 w-16" />
 
         <h1 className="text-xl font-bold text-foreground mb-4">{data.recipientName}</h1>
 
