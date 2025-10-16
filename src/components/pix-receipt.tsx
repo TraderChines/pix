@@ -3,7 +3,6 @@
 import React, { forwardRef } from 'react';
 import { format } from 'date-fns';
 import { pt } from 'date-fns/locale';
-import { FileText, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useSidebar } from '@/components/ui/sidebar';
 
@@ -19,22 +18,61 @@ interface PixReceiptProps {
 }
 
 const ReceiptIcon = (props: React.SVGProps<SVGSVGElement>) => (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="64"
-      height="64"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="64"
+    height="64"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    {...props}
+  >
+    <circle cx="12" cy="12" r="10" fill="currentColor" stroke="none" />
+    <path d="m9 12 2 2 4-4" stroke="black" />
+  </svg>
+);
+
+const FileTextIcon = (props: React.SVGProps<SVGSVGElement>) => (
+    <svg 
+      xmlns="http://www.w3.org/2000/svg" 
+      width="24" 
+      height="24" 
+      viewBox="0 0 24 24" 
+      fill="none" 
+      stroke="currentColor" 
+      strokeWidth="2" 
+      strokeLinecap="round" 
       strokeLinejoin="round"
       {...props}
     >
-      <circle cx="12" cy="12" r="10" fill="currentColor" stroke="none" />
-      <path d="m9 12 2 2 4-4" stroke="black" />
+      <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
+      <polyline points="14 2 14 8 20 8" />
+      <line x1="16" y1="13" x2="8" y2="13" />
+      <line x1="16" y1="17" x2="8" y2="17" />
+      <line x1="10" y1="9" x2="8" y2="9" />
     </svg>
-  );
+);
+
+const MailIcon = (props: React.SVGProps<SVGSVGElement>) => (
+    <svg 
+      xmlns="http://www.w3.org/2000/svg" 
+      width="24" 
+      height="24" 
+      viewBox="0 0 24 24" 
+      fill="none" 
+      stroke="currentColor" 
+      strokeWidth="2" 
+      strokeLinecap="round" 
+      strokeLinejoin="round"
+      {...props}
+    >
+      <rect width="20" height="16" x="2" y="4" rx="2" />
+      <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+    </svg>
+);
 
 export const PixReceipt = forwardRef<HTMLDivElement, PixReceiptProps>(({ data }, ref) => {
   const { toggleSidebar } = useSidebar();
@@ -67,13 +105,13 @@ export const PixReceipt = forwardRef<HTMLDivElement, PixReceiptProps>(({ data },
         <div className="flex justify-around w-full mb-8 text-sm text-center">
             <button className="flex flex-col items-center gap-2 text-foreground focus:outline-none focus:ring-2 focus:ring-ring rounded-lg p-2">
                 <span className="w-14 h-14 bg-secondary rounded-full flex items-center justify-center">
-                    <FileText className="w-6 h-6"/>
+                    <FileTextIcon className="w-6 h-6"/>
                 </span>
                 <span>Abrir<br/>comprovante</span>
             </button>
             <button className="flex flex-col items-center gap-2 text-foreground focus:outline-none focus:ring-2 focus:ring-ring rounded-lg p-2">
                 <span className="w-14 h-14 bg-secondary rounded-full flex items-center justify-center">
-                    <Mail className="w-6 h-6"/>
+                    <MailIcon className="w-6 h-6"/>
                 </span>
                 <span>Enviar<br/>comprovante</span>
             </button>
