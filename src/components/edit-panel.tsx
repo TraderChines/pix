@@ -7,7 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Button } from '@/components/ui/button';
-import { Calendar as CalendarIcon, Save } from 'lucide-react';
+import { Calendar as CalendarIcon, Save, Clock } from 'lucide-react';
 import { Calendar } from '@/components/ui/calendar';
 import { format } from 'date-fns';
 import { pt } from 'date-fns/locale';
@@ -74,6 +74,10 @@ export function EditPanel({ receiptData, setReceiptData }: EditPanelProps) {
         });
     }
 
+    const handleSyncDateTime = () => {
+        setReceiptData(prev => ({ ...prev, timestamp: new Date() }));
+    };
+
     return (
         <form onSubmit={handleSubmit} className="p-4 space-y-6 h-full flex flex-col">
             <div className="flex-grow space-y-6">
@@ -89,37 +93,42 @@ export function EditPanel({ receiptData, setReceiptData }: EditPanelProps) {
                         className="bg-background"
                     />
                 </div>
-
-                <div className="space-y-2">
-                    <Label>Data</Label>
-                    <Popover>
-                        <PopoverTrigger asChild>
-                            <Button variant="outline" className="w-full justify-start font-normal bg-background">
-                                <CalendarIcon className="mr-2 h-4 w-4" />
-                                {format(receiptData.timestamp, 'PPP', { locale: pt })}
-                            </Button>
-                        </PopoverTrigger>
-                        <PopoverContent className="w-auto p-0">
-                            <Calendar
-                                mode="single"
-                                selected={receiptData.timestamp}
-                                onSelect={handleDateChange}
-                                initialFocus
-                            />
-                        </PopoverContent>
-                    </Popover>
-                </div>
                 
                 <div className="space-y-2">
-                    <Label htmlFor="time">Hora</Label>
-                    <Input
-                        id="time"
-                        type="time"
-                        step="1"
-                        value={format(receiptData.timestamp, 'HH:mm:ss')}
-                        onChange={handleTimeChange}
-                        className="bg-background"
-                    />
+                    <div className='flex justify-between items-center mb-2'>
+                        <Label>Data e Hora</Label>
+                        <Button variant="ghost" size="sm" type="button" onClick={handleSyncDateTime} className="text-xs">
+                            <Clock className="mr-2 h-3 w-3" />
+                            Sincronizar Agora
+                        </Button>
+                    </div>
+                    <div className="flex gap-2">
+                        <Popover>
+                            <PopoverTrigger asChild>
+                                <Button variant="outline" className="w-full justify-start font-normal bg-background">
+                                    <CalendarIcon className="mr-2 h-4 w-4" />
+                                    {format(receiptData.timestamp, 'dd/MM/yy', { locale: pt })}
+                                </Button>
+                            </PopoverTrigger>
+                            <PopoverContent className="w-auto p-0">
+                                <Calendar
+                                    mode="single"
+                                    selected={receiptData.timestamp}
+                                    onSelect={handleDateChange}
+                                    initialFocus
+                                />
+                            </PopoverContent>
+                        </Popover>
+                        
+                        <Input
+                            id="time"
+                            type="time"
+                            step="1"
+                            value={format(receiptData.timestamp, 'HH:mm:ss')}
+                            onChange={handleTimeChange}
+                            className="bg-background"
+                        />
+                    </div>
                 </div>
 
                 <div className="space-y-2">
