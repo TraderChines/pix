@@ -10,7 +10,7 @@ import { SidebarProvider, Sidebar, SidebarInset, SidebarTrigger, SidebarHeader, 
 
 export default function Home() {
   const [receiptData, setReceiptData] = useState<PixReceiptData>({
-    amount: 178.41,
+    amount: 10000,
     timestamp: new Date('2023-08-12T08:06:34'),
     recipientName: 'Localpay do Brasil Serviços de Pagamentos Ltda',
     payerName: 'Nome do Cliente',

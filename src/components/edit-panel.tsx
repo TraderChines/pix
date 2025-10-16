@@ -89,7 +89,7 @@ export function EditPanel({ receiptData, setReceiptData }: EditPanelProps) {
                         step="0.01"
                         value={receiptData.amount}
                         onChange={handleAmountChange}
-                        placeholder="178.41"
+                        placeholder="10000.00"
                         className="bg-background"
                     />
                 </div>
