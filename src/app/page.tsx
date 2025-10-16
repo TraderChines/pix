@@ -58,7 +58,11 @@ export default function Home() {
           <h2 className="text-xl font-semibold text-foreground">Editar Comprovante</h2>
         </SidebarHeader>
         <SidebarContent>
-          <EditPanel receiptData={receiptData} setReceiptData={setReceiptData} />
+          <EditPanel 
+            receiptData={receiptData} 
+            setReceiptData={setReceiptData} 
+            onDownloadImage={handleDownloadImage}
+          />
         </SidebarContent>
       </Sidebar>
       <SidebarInset>
@@ -69,12 +73,6 @@ export default function Home() {
           <div className="w-full max-w-md">
             <div ref={receiptRef}>
               <PixReceipt data={receiptData} />
-            </div>
-            <div className="mt-8">
-              <Button onClick={handleDownloadImage} className="w-full bg-secondary hover:bg-secondary/80 text-foreground">
-                <Download className="mr-2 h-4 w-4" />
-                Baixar comprovante em imagem (PNG)
-              </Button>
             </div>
           </div>
         </main>

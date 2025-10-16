@@ -7,7 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Button } from '@/components/ui/button';
-import { Calendar as CalendarIcon, Save, Clock } from 'lucide-react';
+import { Calendar as CalendarIcon, Save, Clock, Download } from 'lucide-react';
 import { Calendar } from '@/components/ui/calendar';
 import { format } from 'date-fns';
 import { pt } from 'date-fns/locale';
@@ -18,9 +18,10 @@ import { ThemeToggle } from './theme-toggle';
 interface EditPanelProps {
     receiptData: PixReceiptData;
     setReceiptData: Dispatch<SetStateAction<PixReceiptData>>;
+    onDownloadImage: () => void;
 }
 
-export function EditPanel({ receiptData, setReceiptData }: EditPanelProps) {
+export function EditPanel({ receiptData, setReceiptData, onDownloadImage }: EditPanelProps) {
     const [isPending, startTransition] = useTransition();
     const { toast } = useToast();
 
@@ -144,6 +145,10 @@ export function EditPanel({ receiptData, setReceiptData }: EditPanelProps) {
                 </div>
             </div>
             <div className="space-y-2">
+                 <Button onClick={onDownloadImage} type="button" variant="secondary" className="w-full">
+                    <Download className="mr-2 h-4 w-4" />
+                    Baixar comprovante (PNG)
+                </Button>
                 <ThemeToggle />
                 <Button type="submit" disabled={isPending} className="w-full bg-accent text-accent-foreground hover:bg-accent/90">
                     {isPending ? 'Salvando...' : <> <Save className="mr-2 h-4 w-4" /> Salvar Alterações </>}
